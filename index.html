@@ -34,18 +34,20 @@
 	<title>My Ethereum Wallet</title>
 	<div id="canvas-container" > 
 		<div id="loadingMessage">🎥 Unable to access video stream (please make sure you have a webcam enabled)</div>
+			
 			<canvas id="canvas" hidden></canvas>
 		<div id="output" hidden>
 		<div id="outputMessage">No QR code detected.</div>
-		<div><b>Data:</b> <span id="outputData"></span></div>	
+		<div><b>Data:</b> <span id="outputData"></span></div>
+		
 	</div>
-
+	<button id="cameronoff">Camera</button>
 	
 	
 	<script>
 		$(document).ready(function () {
 			let DEBUG = 1;
-			
+			let cameraEnabled = true;
 		
 			var video = document.createElement("video");
 			var canvasElement = document.getElementById("canvas");
@@ -55,6 +57,14 @@
 			var outputMessage = document.getElementById("outputMessage");
 			var outputData = document.getElementById("outputData");
 			
+			function toggleCamera() {
+			  cameraEnabled = !cameraEnabled;
+			  if (cameraEnabled) {
+				video.play();
+			  } else {
+				video.pause();
+			  }
+			}
 			
 			
 			
@@ -213,9 +223,13 @@
 
 				$('#message').text(" account: " + account.address);
 				alert("Your account has been created..!!!" + account.address);
-
+			
 				
 			})
+			
+			$('#cameronoff').on('click', function () {
+			  toggleCamera();
+			});
 		})
 	</script>
 	
